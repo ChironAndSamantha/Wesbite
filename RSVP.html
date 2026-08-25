@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RSVP - Chiron & Samantha</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;800&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  /* Bold Pastel Palette */
+  --pastel-bg: #FFF9F6;          /* Soft Off-White/Cream */
+  --pastel-blush: #FFD6E0;       /* Soft Vivid Blush */
+  --pastel-mint: #C1F0C8;        /* Vibrant Pastel Mint */
+  --pastel-lavender: #E2D4F9;    /* Soft Rich Lavender */
+  --pastel-peach: #FFE5EC;       /* Light Warm Peach */
+  
+  /* High-Contrast Anchors */
+  --text-dark: #1F2421;          /* Deep Charcoal (High Contrast Legibility) */
+  --border-dark: #2B302C;        /* Bold Structural Borders */
+  --text-muted: #4A524D;        /* Secondary Text */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background: var(--pastel-bg);
+  color: var(--text-dark);
+  display: flex;
+  flex-direction: column; /* Stacks containers vertically */
+  align-items: center;
+  justify-content: center;
+  gap: 30px;              /* Space between RSVP card and Wishing Well card */
+  min-height: 100vh;
+  padding: 40px 20px;
+}
+
+/* FORM CONTAINER */
+.container {
+  width: 100%;
+  max-width: 520px;
+  padding: 45px 40px;
+  border-radius: 24px;
+  background: #FFFFFF;
+  border: 3px solid var(--border-dark);
+  box-shadow: 10px 10px 0px var(--pastel-lavender);
+  text-align: center;
+}
+
+/* TITLE */
+h1, h3 {
+  font-family: "Playfair Display", serif;
+  font-weight: 800;
+  color: var(--text-dark);
+}
+
+h1 {
+  font-size: 2.8rem;
+  margin-bottom: 5px;
+}
+
+h3 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  color: var(--text-muted);
+  font-weight: 500;
+  margin-bottom: 30px;
+}
+
+/* INPUTS */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+input, select, textarea {
+  font-family: "Poppins", sans-serif;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 2px solid var(--border-dark);
+  background: var(--pastel-bg);
+  color: var(--text-dark);
+  font-size: 15px;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+input::placeholder, textarea::placeholder {
+  color: var(--text-muted);
+}
+
+input:focus, select:focus, textarea:focus {
+  background: #FFFFFF;
+  box-shadow: 4px 4px 0px var(--pastel-blush);
+  transform: translate(-2px, -2px);
+}
+
+/* BUTTONS */
+button, .wishing-well-btn {
+  display: inline-block;
+  text-decoration: none;
+  margin-top: 10px;
+  padding: 16px;
+  border: 3px solid var(--border-dark);
+  border-radius: 50px;
+  background: var(--pastel-mint);
+  color: var(--text-dark);
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  cursor: pointer;
+  box-shadow: 5px 5px 0px var(--border-dark);
+  transition: all 0.2s ease;
+  width: 100%;
+}
+
+button:hover, .wishing-well-btn:hover {
+  background: var(--pastel-blush);
+  transform: translate(-2px, -2px);
+  box-shadow: 7px 7px 0px var(--border-dark);
+}
+
+/* BACK LINK */
+.back {
+  display: inline-block;
+  margin-top: 25px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-dark);
+  text-decoration: none;
+  padding: 6px 14px;
+  border-radius: 20px;
+  transition: all 0.2s ease;
+}
+
+.back:hover {
+  background: var(--pastel-peach);
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>RSVP</h1>
+  <p class="subtitle">Chiron & Samantha</p>
+
+  <!-- SIMPLE EMAIL FORM -->
+  <form action="mailto:your-email@example.com" method="POST" enctype="text/plain">
+    
+    <input type="text" name="Name" placeholder="Your Full Name" required>
+
+    <input type="email" name="Email" placeholder="Your Email" required>
+
+    <select name="Attendance" required>
+      <option value="">Will you attend?</option>
+      <option value="Yes">Joyfully Accept</option>
+      <option value="No">Regretfully Decline</option>
+    </select>
+
+    <input type="number" name="Guests" placeholder="Number of Guests" min="1">
+
+    <textarea name="Message" placeholder="Dietary requirements or message" rows="3"></textarea>
+
+    <button type="submit">Send RSVP</button>
+  </form>
+
+  <a href="index.html" class="back">← Back to Invitation</a>
+</div>
+
+
+
+</body>
+</html>
