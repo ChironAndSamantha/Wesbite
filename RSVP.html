@@ -93,6 +93,7 @@ input, select, textarea {
   font-size: 15px;
   outline: none;
   transition: all 0.2s ease;
+  width: 100%;
 }
 
 input::placeholder, textarea::placeholder {
@@ -103,6 +104,40 @@ input:focus, select:focus, textarea:focus {
   background: #FFFFFF;
   box-shadow: 4px 4px 0px var(--pastel-blush);
   transform: translate(-2px, -2px);
+}
+
+/* DYNAMIC KIDS SECTION */
+.kids-container {
+  display: none;
+  flex-direction: column;
+  gap: 12px;
+  text-align: left;
+  background: var(--pastel-peach);
+  padding: 18px;
+  border-radius: 16px;
+  border: 2px solid var(--border-dark);
+}
+
+.kids-title {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text-dark);
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.checkbox-group input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--border-dark);
+  cursor: pointer;
 }
 
 /* BUTTONS */
@@ -155,13 +190,11 @@ button:hover, .wishing-well-btn:hover {
   <h1>RSVP</h1>
   <p class="subtitle">Chiron & Samantha</p>
 
-  <!-- SIMPLE EMAIL FORM -->
-  <form
-  action="https://formspree.io/f/xzeplane"
-  method="POST"
->
+  <!-- FORM -->
+  <form action="https://formspree.io/f/xzeplane" method="POST">
     
-    <input type="text" name="Name" placeholder="Your Full Name" required>
+    <input type="text" id="nameInput" list="guestList" name="Name" placeholder="Type or select your full name" required autocomplete="off">
+    <datalist id="guestList"></datalist>
 
     <input type="email" name="Email" placeholder="Your Email" required>
 
@@ -170,6 +203,12 @@ button:hover, .wishing-well-btn:hover {
       <option value="Yes">Joyfully Accept</option>
       <option value="No">Regretfully Decline</option>
     </select>
+
+    <!-- DYNAMIC KIDS CHECKBOX SECTION -->
+    <div id="kidsSection" class="kids-container">
+      <span class="kids-title">Will your children be attending?</span>
+      <div id="kidsList"></div>
+    </div>
 
     <input type="number" name="Guests" placeholder="Number of Guests" min="1">
 
@@ -181,7 +220,90 @@ button:hover, .wishing-well-btn:hover {
   <a href="index.html" class="back">← Back to Invitation</a>
 </div>
 
+<script>
+// Exact mappings based on your provided list
+const familyData = {
+  "Emma Attard": ["Lachlan Russell", "Alice Attard", "Timmy Attard", "Sophia Attard"],
+  "Josh Attard": ["Lachlan Russell", "Alice Attard", "Timmy Attard", "Sophia Attard"],
+  
+  "Tara Cleal": ["Mia Prentergast", "Lily Prentergast", "Noah Prentergast", "Oliver Prentergast", "Kayden Prentergast"],
+  "Gad Prentergast": ["Mia Prentergast", "Lily Prentergast", "Noah Prentergast", "Oliver Prentergast", "Kayden Prentergast"],
+  
+  "Leonie Genge": ["Archer Genge"],
+  "Richard Genge": ["Archer Genge"],
+  
+  "Lyndal Chaladan": ["Ryan Chaladan", "Nico Chaladan"],
+  "Samil Chaladan": ["Ryan Chaladan", "Nico Chaladan"],
 
+  "Angie Shaxson": ["Jayden Stubbs", "Siena Jones"],
+
+  "Chloe Shaxson": ["Mika Shaxson"],
+
+  "Amanda Selwood": ["Eli Selwood"],
+  "Keiren Selwood": ["Eli Selwood"]
+  
+};
+
+const allGuests = [
+  "Teisha Hoad", "Mark Edgington", "Jack Edgington", "Gwen Hoad", "Laurie Hoad",
+  "Judith Edgington", "John Edgington", "Vanessa Dent", "Wayne Steele", "Kayla Auty",
+  "Keira Steele", "Kael Steele", "Tynan Steele", "Julie Pieroz", "Gweneth Lily White",
+  "Hayden Steele", "Carol Steele", "Michelle Edgington", "Lauren Wilmott", "Mandy Carpenter",
+  "Bryce Carpenter", "Anne Martin", "Bob Martin", "Troy Martin", "Maddy Martin",
+  "Whitney Martin", "Tyler Martin", "Hope Martin", "Bailey Martin", "Megan Adams",
+  "Josh Mondy", "Dori Pieroz", "Ken Pieroz", "Kristy Pieroz", "Angie Pieroz", "Connor Shaxson",
+  "Shalan Walker", "Makaylah Adams", "Zachary Ridley", "Ashley Jennet", "Samantha Greentree",
+  "Kurtis Ford", "Cooper Trotman", "Jake Ashbrooke", "Claire Susan", "Lara Dye",
+  "Kim Hickson", "Peter Wilson", "Patrick Beadman", "Jess Beadman", "Nelly Elizabeth",
+  "Amanda Selwood", "Keiran Selwood", "Tahleha Aksu", "Emma Attard", "Josh Attard",
+  "Tara Cleal", "Gad Prentergast", "Leonie Genge", "Richard Genge", "Issac Genge",
+  "Lyndal Chaladan", "Samil Chaladan", "Angie Shaxson", "Chloe Shaxson", "Laura Myers", 
+  "Emelia Selwood", "Eli Selwood", "Ellie", "Simon Smith", "Amanda Auty"
+];
+
+// Populate datalist for autocompletion
+const datalist = document.getElementById("guestList");
+allGuests.forEach(guest => {
+  const option = document.createElement("option");
+  option.value = guest;
+  datalist.appendChild(option);
+});
+
+// Dynamic UI updates based on name input
+const nameInput = document.getElementById("nameInput");
+const kidsSection = document.getElementById("kidsSection");
+const kidsList = document.getElementById("kidsList");
+
+nameInput.addEventListener("input", function () {
+  const enteredName = this.value.trim().toLowerCase();
+  kidsList.innerHTML = ""; // Clear previous checkboxes
+
+  // Search through familyData ignoring case and matching partial names (e.g. "emma" matches "Emma Attard")
+  const matchedKey = Object.keys(familyData).find(key => {
+    const keyLower = key.toLowerCase();
+    return keyLower === enteredName || keyLower.startsWith(enteredName) || enteredName.startsWith(keyLower);
+  });
+
+  if (matchedKey && enteredName.length >= 3) {
+    familyData[matchedKey].forEach(child => {
+      const label = document.createElement("label");
+      label.className = "checkbox-group";
+      
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.name = `Attending Child - ${child}`;
+      checkbox.value = "Attending";
+
+      label.appendChild(checkbox);
+      label.appendChild(document.createTextNode(child));
+      kidsList.appendChild(label);
+    });
+    kidsSection.style.display = "flex";
+  } else {
+    kidsSection.style.display = "none";
+  }
+});
+</script>
 
 </body>
 </html>
