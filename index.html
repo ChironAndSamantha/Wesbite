@@ -1,326 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chiron & Samantha</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;800&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-
-<style>
-:root {
-  /* Bold Pastel Palette */
-  --pastel-bg: #FFF9F6;          /* Soft Off-White/Cream */
-  --pastel-blush: #FFD6E0;       /* Soft Vivid Blush */
-  --pastel-mint: #C1F0C8;        /* Vibrant Pastel Mint */
-  --pastel-lavender: #E2D4F9;    /* Soft Rich Lavender */
-  --pastel-peach: #FFE5EC;       /* Light Warm Peach */
-  
-  /* High-Contrast Anchors */
-  --text-dark: #1F2421;          /* Deep Charcoal (High Contrast Legibility) */
-  --border-dark: #2B302C;        /* Bold Structural Borders */
-  --text-muted: #4A524D;        /* Secondary Text */
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/* BODY */
-body {
-  font-family: "Poppins", sans-serif;
-  background: var(--pastel-bg);
-  color: var(--text-dark);
-}
-
-/* HERO */
-.hero {
-  min-height: 100vh;
-  min-height: 100dvh;
-  width: 100%;
-  background:
-    linear-gradient(rgba(31, 36, 33, 0.45), rgba(31, 36, 33, 0.45)),
-    url("img/Chiron+Sam-21.jpg") center center / cover no-repeat;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: #fff;
-  padding: 20px;
-}
-
-.hero-content {
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  padding: 45px 65px;
-  border-radius: 24px;
-  background: rgba(255, 255, 255, 0.15);
-  border: 3px solid rgba(255, 255, 255, 0.4);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-  max-width: 90%;
-}
-
-.hero h1 {
-  font-family: "Playfair Display", serif;
-  font-size: 3.8rem;
-  font-weight: 800;
-  letter-spacing: 2px;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-}
-
-.hero p {
-  margin-top: 10px;
-  font-weight: 500;
-  letter-spacing: 3px;
-  text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
-}
-
-/* SECTION */
-.section {
-  padding: 100px 20px;
-  max-width: 1100px;
-  margin: auto;
-  text-align: center;
-}
-
-h2 {
-  font-family: "Playfair Display", serif;
-  font-size: 2.8rem;
-  font-weight: 800;
-  color: var(--text-dark);
-}
-
-.subtitle {
-  color: var(--text-muted);
-  font-weight: 500;
-  margin: 10px 0 30px;
-}
-
-/* CARDS WITH BOLD PASTEL SHADOWS */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 30px;
-  margin-top: 50px;
-}
-
-.card {
-  padding: 35px;
-  border-radius: 20px;
-  background: #FFFFFF;
-  border: 3px solid var(--border-dark);
-  box-shadow: 8px 8px 0px var(--pastel-blush);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.card:nth-child(2) {
-  box-shadow: 8px 8px 0px var(--pastel-mint);
-}
-
-.card:nth-child(3) {
-  box-shadow: 8px 8px 0px var(--pastel-lavender);
-}
-
-.card:hover {
-  transform: translate(-3px, -3px);
-  box-shadow: 12px 12px 0px var(--pastel-blush);
-}
-
-.card:nth-child(2):hover {
-  box-shadow: 12px 12px 0px var(--pastel-mint);
-}
-
-.card:nth-child(3):hover {
-  box-shadow: 12px 12px 0px var(--pastel-lavender);
-}
-
-.card h3 {
-  font-family: "Playfair Display", serif;
-  font-size: 1.6rem;
-  font-weight: 800;
-  color: var(--text-dark);
-  margin-bottom: 10px;
-}
-
-/* DIVIDER */
-.line {
-  width: 70px;
-  height: 5px;
-  background: var(--pastel-lavender);
-  border: 2px solid var(--border-dark);
-  border-radius: 10px;
-  margin: 20px auto;
-}
-
-/* BUTTON */
-.button {
-  display: inline-block;
-  margin-top: 40px;
-  padding: 16px 45px;
-  border-radius: 50px;
-  background: var(--pastel-mint);
-  color: var(--text-dark);
-  font-weight: 600;
-  border: 3px solid var(--border-dark);
-  box-shadow: 5px 5px 0px var(--border-dark);
-  text-decoration: none;
-  letter-spacing: 1px;
-  transition: all 0.2s ease;
-}
-
-.button:hover {
-  background: var(--pastel-blush);
-  transform: translate(-2px, -2px);
-  box-shadow: 7px 7px 0px var(--border-dark);
-}
-
-/* FOOTER */
-.footer {
-  padding: 40px 20px;
-  background: var(--pastel-lavender);
-  border-top: 3px solid var(--border-dark);
-  color: var(--text-dark);
-  font-weight: 600;
-  text-align: center;
-  font-size: 1rem;
-}
-
-/* MOBILE RESPONSIVE ADJUSTMENTS */
-@media (max-width: 768px) {
-  .hero {
-    align-items: flex-end; /* Pushes content toward the bottom */
-    padding-bottom: 60px;  /* Keeps breathing room above section boundary */
-  }
-
-  .hero-content {
-    padding: 28px 20px;
-  }
-
-  .hero h1 {
-    font-size: 2.2rem;
-  }
-
-  .hero p {
-    font-size: 0.95rem;
-    letter-spacing: 1.5px;
-  }
-
-  .section {
-    padding: 60px 20px;
-  }
-
-  h2 {
-    font-size: 2.2rem;
-  }
-
-  .grid {
-    gap: 20px;
-  }
-}
-.wishing-well-btn {
-    display: inline-block;
-    background-color: #0070BA; /* PayPal Blue */
-    color: #ffffff;
-    padding: 12px 24px;
-    font-family: Arial, sans-serif;
-    font-weight: bold;
-    text-decoration: none;
-    border-radius: 25px;
-    text-align: center;
-  }
-  
-  .wishing-well-btn:hover {
-    background-color: #005ea6;
-  }
-
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Thank you for celebrating Chiron and Samantha’s engagement. Relive the party, download your photos, and count down to 28 October 2028.">
+  <meta name="theme-color" content="#FFF9F6">
+  <title>Chiron & Samantha — Thank you for celebrating</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;800&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="photos.js" defer></script>
+  <script src="zip.js" defer></script>
+  <script src="app.js" defer></script>
 </head>
 <body>
-
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-content">
-    <h1>Chiron & Samantha</h1>
-    <p>October 31st, 2026</p>
-    <p>We're Engaged!</p>
-  </div>
-</section>
-
-<!-- STORY -->
-<section class="section">
-  <h2>Our Story</h2>
-  <div class="line"></div>
-  <p class="subtitle">
-    Some love stories happen exactly as planned. Ours took a little longer to find its way.</p>
-
-<p>Nine years ago, we met and shared a connection that neither of us forgot. Although we dated briefly, 
-life had other plans for us at the time, and we went our separate ways. Looking back now, 
-it seems we both had growing to do, lessons to learn, and journeys to take before we were truly 
-ready for the life we would eventually build together.</p>
-<br>
-<p>Years later, in 2021, fate brought us back to one another through a simple online reconnection. 
-What started as a conversation quickly felt like coming home. Despite the years apart, the connection was 
-still there, stronger than ever, and it didn't take long for us to realise that this was something too special to let slip away again.</p>
-<br>
-<p>In 2022, we made our relationship official, and just six months later, we took the leap and moved in together. 
-It felt effortless, as though life was simply falling into place exactly as it was meant to. Soon after, our 
-little family grew with the addition of three beautiful cats, who filled our home with even more love, laughter, 
-chaos, and countless cuddles.</p>
-<br>
-<p>Since then, we've shared adventures both big and small, celebrated milestones, supported each other through challenges, 
-and built a home that is full of happiness, comfort, and unconditional love. The everyday moments, quiet mornings, 
-shared dreams, late-night laughs, and everything in between have become our favourite part of this journey.</p>
-<br>
-<p>What began as a brief chapter nine years ago became the love story of a lifetime. Sometimes the universe has a funny way 
-of bringing two people back together when the timing is finally right.</p>
-<br>
-<p>Today, we couldn't be more excited to celebrate this next chapter with the people we love most. Thank you for being part 
-of our story, and for joining us as we celebrate our engagement and the future that lies ahead.
-  </p>
-  <br>
-
-</section>
-
-<!-- DETAILS -->
-<section class="section">
-  <h2>Engagement Party Details</h2>
-  <div class="line"></div>
-
-  <div class="grid">
-    <div class="card">
-      <h3>Details</h3>
-      <p>October 31st, 2026</p>
-      <p>Start: 5:30 PM</p>
-      <p>End: 11:00 PM</p>
-      <P>Dress Code: Cocktail</P>
-      
+  <a class="skip" href="#thank-you">Skip to content</a>
+  <header class="hero">
+    <div class="hero-content">
+      <p class="eyebrow">Our next chapter</p>
+      <h1>Chiron & Samantha</h1>
+      <p>So much love. So many memories.</p>
+      <a class="button" href="#gallery">Relive the celebration ↓</a>
     </div>
-    <div class="card">
-      <h3>Location</h3>
-      <p>The Grange Hotel - Function Room</p>
-      <p>Pacific Hwy, Wyoming NSW 2250</p>
-    </div>
-
-    <div class="card">
-      <h3>Children</h3>
-      <p>Welcome</p>
-      <p>Adult Music Starts after <br>8:30 PM</p>
-      <p>18+ from 10:00PM <b>(venue enforced)</b></p>
-    </div>
-
-  </div>
-
-  <a href="RSVP.html" class="button">RSVP</a>
-  <br><br>
-
-</section>
-
-<!-- FOOTER -->
-<footer class="footer">
-  <p>We can't wait to celebrate with you 🌸</p>
-</footer>
-
+  </header>
+  <main>
+    <section class="section" id="thank-you">
+      <p class="eyebrow">31 October 2026 · Our engagement party</p>
+      <h2>Thank you for being there</h2>
+      <div class="line"></div>
+      <p class="intro">To everyone who joined us to celebrate our engagement — thank you for making it such a special night.</p>
+      <p class="copy">We’re so grateful for the love, laughter, kind wishes, and memories we shared with you. Having our favourite people together meant the world to us. We’ll treasure these moments as we look forward to everything still to come.</p>
+      <p class="signature">With love, Chiron & Samantha</p>
+    </section>
+    <section class="wedding-band" aria-labelledby="wedding-title">
+      <div class="section">
+        <p class="eyebrow">The next celebration</p>
+        <h2 id="wedding-title">We’re getting married!</h2>
+        <p class="wedding-date"><time datetime="2028-10-28">28 October 2028</time></p>
+        <p id="countdown-caption">Counting down to our wedding day</p>
+        <div class="countdown" role="group" aria-label="Time until 28 October 2028, Sydney time">
+          <div class="card"><strong id="days">—</strong><span>Days</span></div>
+          <div class="card"><strong id="hours">—</strong><span>Hours</span></div>
+          <div class="card"><strong id="minutes">—</strong><span>Minutes</span></div>
+          <div class="card"><strong id="seconds">—</strong><span>Seconds</span></div>
+        </div>
+        <div class="invitation"><h3>A little something to look forward to</h3><p>Wedding invitations will be coming in <strong>2027</strong>.<br>We can’t wait to celebrate this next chapter with you.</p></div>
+      </div>
+    </section>
+    <section class="section gallery-section" id="gallery">
+      <p class="eyebrow">A night to remember</p>
+      <h2>Our engagement gallery</h2>
+      <div class="line"></div>
+      <p class="subtitle">Find your favourite moments, take a closer look, and keep a copy.</p>
+      <p class="selection-help">Tick the photos you love, then download your selection together as a ZIP. You can still download any photo individually.</p>
+      <details class="save-help"><summary>How to save photos on your device</summary><p><strong>iPhone / iPad:</strong> Open a photo and tap Save / Share, then choose Save Image if available. You can also open the original, touch and hold the image, and choose Save to Photos. Downloads may appear in Files → Downloads.</p><p><strong>Android:</strong> Tap Download original, or use Save / Share to send it to a supported app. Downloads are usually in Files → Downloads.</p><p><strong>PC / Mac:</strong> Tap Download original. Your browser will save the photo to your downloads folder or ask where to put it.</p></details>
+      <p id="gallery-count" class="subtitle" aria-live="polite"></p>
+      <a id="download-all" class="button" href="https://github.com/ChironAndSamantha/Wesbite/releases/download/party-photos/Chiron-and-Samantha-all-photos.zip" download="Chiron-and-Samantha-all-photos.zip">Download all 163 photos · 365 MB ZIP</a>
+      <p class="help">Multiple photos download as one ZIP file. On iPhone, tap the ZIP in Files to unzip it; on Android or your computer, open or extract it to see your photos.</p>
+      <div id="photo-grid" class="photo-grid"></div>
+      <button id="load-more" class="button">Show more photos</button>
+      <noscript><p>Please enable JavaScript to browse the gallery. You can still view the wedding date above.</p></noscript>
+    </section>
+  </main>
+  <footer class="footer"><p>Thank you for being part of our story 🌸</p><p>Chiron & Samantha · 28.10.2028</p></footer>
+  <aside id="selection-bar" class="selection-bar" aria-label="Selected photo downloads" hidden>
+    <div><button id="download-selected" class="button">Download 0 images</button><button id="clear-selection" class="clear-selection">Clear selection</button></div>
+    <p id="selection-status" role="status" aria-live="polite"></p>
+    <a id="zip-ready" class="button" hidden>Save ZIP to device</a>
+  </aside>
+  <dialog id="photo-dialog" aria-labelledby="photo-title">
+    <div class="dialog-header"><h2 id="photo-title">Party photo</h2><button id="close-dialog" class="close" aria-label="Close photo">×</button></div>
+    <img id="large-photo" alt="">
+    <div class="dialog-actions"><button id="previous" class="small-button" aria-label="Previous photo">← Previous</button><button id="next" class="small-button" aria-label="Next photo">Next →</button></div>
+    <p id="photo-filename"></p>
+    <div class="download-actions"><a id="download-photo" class="button" download>Download original</a><button id="share-photo" class="button" hidden>Save / Share</button><a id="open-original" target="_blank" rel="noopener">Open original ↗</a></div>
+    <p id="save-status" class="help" role="status"></p>
+  </dialog>
 </body>
 </html>
+
