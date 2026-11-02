@@ -1,0 +1,2 @@
+# Upload the full archive as a GitHub Release asset, not a Git file.
+/downloads/*.zip
