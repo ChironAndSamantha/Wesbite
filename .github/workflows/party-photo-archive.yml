@@ -1,0 +1,41 @@
+name: Publish party photo ZIP
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - photos.js
+      - build_archive.py
+      - photos/**
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: party-photo-archive
+  cancel-in-progress: false
+
+jobs:
+  publish-archive:
+    if: github.repository == 'ChironAndSamantha/Wesbite'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write
+    steps:
+      - name: Check out website
+        uses: actions/checkout@v4
+      - name: Build and verify original-photo archive
+        run: python3 build_archive.py
+      - name: Publish archive to photo release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if ! gh release view party-photos > /dev/null 2>&1; then
+            gh release create party-photos --target "$GITHUB_SHA" --title "Engagement party photos" --notes "All 163 original JPG photos from Chiron and Samantha's engagement party on 31 October 2026."
+          fi
+          gh release upload party-photos downloads/Chiron-and-Samantha-all-photos.zip --clobber
